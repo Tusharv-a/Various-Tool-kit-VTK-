@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tech Dashboard Theme - Dark Mode Default */
+  --background: 222 47% 11%;    /* Deep Navy */
+  --foreground: 210 40% 98%;    /* Off White */
+
+  --card: 222 47% 13%;          /* Slightly Lighter Navy */
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222 47% 13%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 199 89% 48%;       /* Cyan/Electric Blue */
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 217 33% 17%;     /* Dark Grey/Blue */
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 262 83% 58%;        /* Purple Accent */
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 84% 60%;     /* Red */
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217 33% 20%;
+  --input: 217 33% 17%;
+  --ring: 199 89% 48%;
+
+  --radius: 0.75rem;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-semibold;
+  }
+
+  /* Custom Scrollbar for a technical look */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary/50;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full hover:bg-primary/50 transition-colors;
+  }
+}
+
+@layer components {
+  .tech-card {
+    @apply bg-card border border-border/50 rounded-2xl shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-primary/5;
+  }
+  
+  .tech-border {
+    @apply relative overflow-hidden;
+  }
+  
+  .tech-border::after {
+    content: '';
+    @apply absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-primary/0 via-primary/50 to-primary/0 opacity-0 transition-opacity duration-300;
+  }
+  
+  .tech-card:hover .tech-border::after {
+    @apply opacity-100;
+  }
+
+  .data-text {
+    font-family: var(--font-mono);
+  }
+}
+
+/* CRT/Scanline Effect Overlay (Subtle) */
+.scanline {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.02));
+  background-size: 100% 4px;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  opacity: 0.4;
+}
